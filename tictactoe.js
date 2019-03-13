@@ -25,9 +25,20 @@ async function start() {
         + ' ' + ttTable[6] + ' | ' + ttTable[7] + ' | ' + ttTable[8] + ' \n');
 
     let turn = await ask("Who's turn first, \n X or O?\n");
-    let xPlayer = await ask('What is your name for playing X? ');
-    let oPlayer = await ask('What is your name for playing O? ');
-    return player(turn, xPlayer, oPlayer);
+    // let xPlayer = await ask('What is your name for playing X? ');
+    // let oPlayer = await ask('What is your name for playing O? ');
+    return isItXorO(turn);
+
+    async function isItXorO(whosFirst) {
+        if (whosFirst === 'X' || whosFirst === 'O' || whosFirst === 'x' || whosFirst === 'o') {
+            let xPlayer = await ask('What is your name for playing X? ');
+            let oPlayer = await ask('What is your name for playing O? ');
+            return player(turn, xPlayer, oPlayer);
+        } else {
+            turn = await ask("Who's turn fist, \n X or O? \n");
+            return isItXorO(turn);
+        }
+    };
 
     async function player(whosTurn, xPlay, oPlay) {
         // define the table 
