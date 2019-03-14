@@ -25,9 +25,7 @@ async function start() {
         + ' ' + ttTable[6] + ' | ' + ttTable[7] + ' | ' + ttTable[8] + ' \n');
 
     let turn = await ask("Who's turn first, \n X or O?\n");
-    // let xPlayer = await ask('What is your name for playing X? ');
-    // let oPlayer = await ask('What is your name for playing O? ');
-    return isItXorO(turn);
+     return isItXorO(turn);
 
     async function isItXorO(whosFirst) {
         if (whosFirst === 'X' || whosFirst === 'O' || whosFirst === 'x' || whosFirst === 'o') {
@@ -53,77 +51,50 @@ async function start() {
         if (whosTurn === 'X' | whosTurn === 'x') {
             whosTurn = 'X';
             let playerX = await ask('\n' + xPlay + " turn for 'X'\nMove to?\n");
-            return move(playerX);
+            return move(playerX, 'X','O');
         } else if (whosTurn === 'O' | whosTurn === 'o') {
             whosTurn = 'O';
             let playerO = await ask('\n' + oPlay + " turn for 'O'\n Move to?\n");
-            return move(playerO);
+            return move(playerO,'O', 'X');
         } else {
             console.log("You must enter 'x' or 'o'. ");
             start();
         };
 
-        async function move(whichMove) {
+        async function move(whichMove, playerCur, playerNext) {
+            console.log('The move is ' + whichMove + ' and the current player is ' + playerCur +'\n')
 
             //Move is X
-            if (whichMove === '9' && whosTurn === 'X' && ttTable[8] === '9') {
-                ttTable[8] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '8' && whosTurn === 'X' && ttTable[7] === '8') {
-                ttTable[7] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '7' && whosTurn === 'X' && ttTable[6] === '7') {
-                ttTable[6] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '6' && whosTurn === 'X' && ttTable[5] === '6') {
-                ttTable[5] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '5' && whosTurn === 'X' && ttTable[4] === '5') {
-                ttTable[4] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '4' && whosTurn === 'X' && ttTable[3] === '4') {
-                ttTable[3] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '3' && whosTurn === 'X' && ttTable[2] === '3') {
-                ttTable[2] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '2' && whosTurn === 'X' && ttTable[1] === '2') {
-                ttTable[1] = 'X';
-                return whoWon('X', 'O');
-            } else if (whichMove === '1' && whosTurn === 'X' && ttTable[0] === '1') {
-                ttTable[0] = 'X';
-                return whoWon('X', 'O');
-                //Move is O
-            } else if (whichMove === '9' && whosTurn === 'O' && ttTable[8] === '9') {
-                ttTable[8] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '8' && whosTurn === 'O' && ttTable[7] === '8') {
-                ttTable[7] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '7' && whosTurn === 'O' && ttTable[6] === '7') {
-                ttTable[6] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '6' && whosTurn === 'O' && ttTable[5] === '6') {
-                ttTable[5] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '5' && whosTurn === 'O' && ttTable[4] === '5') {
-                ttTable[4] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '4' && whosTurn === 'O' && ttTable[3] === '4') {
-                ttTable[3] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '3' && whosTurn === 'O' && ttTable[2] === '3') {
-                ttTable[2] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '2' && whosTurn === 'O' && ttTable[1] === '2') {
-                ttTable[1] = 'O';
-                return whoWon('O', 'X');
-            } else if (whichMove === '1' && whosTurn === 'O' && ttTable[0] === '1') {
-                ttTable[0] = 'O';
-                return whoWon('O', 'X');
-            } else {
+            if (whichMove === '9' && ttTable[8] === '9') {
+                ttTable[8] = playerCur;
+                return whoWon(playerCur, playerNext);
+             } else if (whichMove === '8' && ttTable[7] === '8') {
+                ttTable[7] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '7' && ttTable[6] === '7') {
+                ttTable[6] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '6' && ttTable[5] === '6') {
+                ttTable[5] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '5' && ttTable[4] === '5') {
+                ttTable[4] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '4' && ttTable[3] === '4') {
+                ttTable[3] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '3' && ttTable[2] === '3') {
+                ttTable[2] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '2' && ttTable[1] === '2') {
+                ttTable[1] = playerCur;
+                return whoWon(playerCur, playerNext);
+            } else if (whichMove === '1' && ttTable[0] === '1') {
+                ttTable[0] = playerCur;
+                return whoWon(playerCur, playerNext);
+                } else {
                 // For when x or o is already entered in block
-                console.log('That block has already been assigned, player ' + whosTurn + ' will try again.')
+                console.log( whichMove +' has already been assigned, player ' + whosTurn + ' will try again.')
                 return player(whosTurn, xPlay, oPlay);
             };
         };
@@ -148,6 +119,7 @@ async function start() {
                 console.log('\nThere are no winners!\n');
                 process.exit();
             } else {
+                console.log('This is the current player ' + curPlayer + ' This is the next player ' + nextPlayer)
                 return player(nextPlayer, xPlay, oPlay);
             }
         }
